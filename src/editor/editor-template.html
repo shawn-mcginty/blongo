@@ -1,0 +1,29 @@
+<div>
+	<form>
+		<div class="alert alert-danger fade show" ng-if="editor.errorMessage !== null">
+			<button type="button" class="close" data-dismiss="alert" aira-label="close" ng-click="editor.clearErrorMessage()">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<strong>Hey, woah!</strong> {{ editor.errorMessage }}
+		</div>
+		<div class="form-group">
+			<label for="title">Title</label>
+			<input type="text" class="form-control" id="title" placeholder="Click Bait Title" ng-model="editor.title">
+		</div>
+		<div class="form-group">
+			<label for="title">Tags</label>
+			<input type="text" class="form-control" id="tags" placeholder="cool stuff,other cool stuff" ng-model="editor.tags">
+			<small>Comma separated</small>
+		</div>
+		<div class="form-group">
+			<label for="title">Body</label>
+			<textarea class="form-control" id="body" rows="3" ng-model="editor.body" ng-model-options="{ updateOn: 'default blur', debounce: { default: 300, blur: 0 } }" ng-change="editor.showPreview()"></textarea>
+			<small>Try markdown, a lot of it is supported!</small>
+		</div>
+		<button type="submit" class="btn btn-primary" ng-click="editor.save()">Save</button>
+	</form>
+	<hr>
+	<p class="lead" ng-if="editor.preview">Body preview:</class>
+	<div ng-bind-html="editor.preview">
+	</div>
+</div>

@@ -1,0 +1,62 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+		script(src="js/lib/jquery.min.js")
+		script(src="js/lib/tether.min.js")
+		script(src="js/lib/bootstrap.min.js")
+		script(src="js/bundle.js")
+		link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
+		link(rel="stylesheet", href="stylesheets/lib/bootstrap.min.css")
+		title Blongo | A quick and dirty blogging platform.
+		base(href="/")
+	body(ng-app="app")
+		nav.navbar.navbar-toggleable-md.navbar-inverse.fixed-top.bg-primary
+			button.navbar-toggler.navbar-toggler-right(type="button", data-toggle="collapse", data-target="#navbar", aria-controls="navbar", aria-expanded="false", aria-label="Toggle navigation")
+				span.navbar-toggler-icon
+			a.navbar-brand(href="#", ui-sref="home")
+				i.material-icons whatshot
+			#navbar.collapse.navbar-collapse
+				ul.navbar-nav.mr-auto
+					li.nav-item
+						a.nav-link(href="#", ui-sref="home", ui-sref-active="active") Read
+					li.nav-item
+						a.nav-link(href="#", ui-sref="topics", ui-sref-active="active") Topics
+					if (currentUser)
+						li.nav-item
+							a.nav-link(href="#", ui-sref="editor", ui-sref-active="active") Write
+						li.nav-item
+							a.nav-link(href="#", ui-sref="dashboard", ui-sref-active="active") Edit
+				form.form-inline
+					if (currentUser)
+						spann.navbar-text Hey, #{currentUser.displayName} &nbsp;
+						a.btn.btn-outline-info(href="/logout", target="_self") Log Out
+					else
+						a.btn.btn-outline-info(href="#", ui-sref="login") Log In
+						span.spacer &nbsp;
+						a.btn.btn-outline-info(href="#", ui-sref="signup") Sign Up
+		.container(style="margin-top:60px;")
+			h1.display-4 Blongo.
+			p.lead The laziest blog you've ever seen.  Read on if you dare.
+			if (errorMessages && errorMessages.length > 0)
+				.row
+					.col-md-12.col-lg-8
+						.alert.alert-danger
+							for msg in errorMessages
+								p #{msg}
+			.row
+				.col-md-12.col-lg-8
+					hr
+				.col-md-12.col-lg-8
+					ui-view
+				.col-sm-12.col-lg-4
+					.card
+						.card-block
+							h4.card-title Other info
+							h6.card-subtitle.mb-2.text-muted This is the stuff on the side, info that probably nobody ever reads.  This guy should drop to the footer if the screen size is too small.
+							p.card-text This blog was created using Bootstrap 4 alpha, so please excuse minor bugs if you find any.  Thanks 👍
+							a(href="https://v4-alpha.getbootstrap.com", class="card-link") Check out Bootstrap 4
+		//- footer
+		//- 	.container
+		//- 		span.text-muted Created for fun, using Angular 1.x and Node 4.x.

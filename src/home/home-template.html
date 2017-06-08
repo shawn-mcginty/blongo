@@ -1,0 +1,15 @@
+<div>
+	<div class="blog-error alert alert-danger" ng-if="home.error !== null">
+		{{ home.error }}
+	</div>
+	<div class="blog-post" ng-repeat="post in home.posts">
+		<h3 class="blog-post-title">{{ post.title }}</h2>
+		<p class="blog-post-meta text-muted">{{ post.displayDate }} by <span class="blog-post-author">{{ post.author }}</span></p>
+		<div class="blog-post-body" ng-bind-html="post.body"></div>
+		<div class="blog-post-footer">
+			<p class="blog-post-tags">
+				<span class="badge badge-pill badge-default" ng-repeat="tag in post.tags">{{tag}}</span>
+			</p>
+		</div>
+	</div>
+</div>

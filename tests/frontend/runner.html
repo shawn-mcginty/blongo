@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Mocha Tests</title>
+		<link href="../../node_modules/mocha/mocha.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div id="mocha"></div>
+
+		<!-- app code -->
+		<script src="../../public/js/lib/jquery.min.js"></script>
+		<script src="../../public/js/bundle.js"></script>
+
+		<!-- testing libs -->
+		<script src="../../node_modules/mocha/mocha.js"></script>
+		<script src="../../node_modules/chai/chai.js"></script>
+		<script src="../../node_modules/sinon/pkg/sinon-no-sourcemaps-2.3.2.js"></script>
+
+		<script>mocha.setup('bdd');</script>
+
+		<!-- angulars magic to make testing easier -->
+		<script src="../../node_modules/angular-mocks/angular-mocks.js"></script>
+
+		<!-- tests -->
+		<script src="home/homeTest.js"></script>
+
+		<!-- mocha bootstrapping -->
+		<script>
+			mocha.checkLeaks();
+			mocha.globals(['jQuery*', 'angular']);
+			mocha.run();
+		</script>
+	</body>
+</html>

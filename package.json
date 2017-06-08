@@ -1,0 +1,56 @@
+{
+  "name": "blongo",
+  "version": "1.0.0",
+  "description": "MEAN stack blog",
+  "main": "",
+  "scripts": {
+    "backend-tests": "node ./node_modules/mocha/bin/mocha --recursive tests/backend",
+    "frontend-tests": "open -a \"Google Chrome\" tests/frontend/runner.html",
+    "test": "npm run backend-tests && npm run frontend-tests",
+    "pack": "node ./node_modules/webpack/bin/webpack.js",
+    "build": "npm run pack && npm run get-libs",
+    "start": "node server/server",
+    "mkdirs": "mkdir -p public/js/lib && mkdir -p public/stylesheets/lib",
+    "get-bs-js": "cp -f node_modules/bootstrap/dist/js/bootstrap.min.js public/js/lib",
+    "get-bs-css": "cp -f node_modules/bootstrap/dist/css/bootstrap.min.css public/stylesheets/lib",
+    "get-jquery": "cp -f node_modules/jquery/dist/jquery.min.js public/js/lib",
+    "get-tether": "cp -f node_modules/tether/dist/js/tether.min.js public/js/lib",
+    "get-libs": "npm run mkdirs && npm run get-tether && npm run get-bs-js && npm run get-bs-css && npm run get-jquery"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shawn-mcginty/blongo.git"
+  },
+  "author": "Shawn McGinty",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shawn-mcginty/blongo/issues"
+  },
+  "homepage": "https://github.com/shawn-mcginty/blongo#readme",
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-sanitize": "^1.6.4",
+    "angular-ui-router": "^1.0.3",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "body-parser": "^1.17.2",
+    "bootstrap": "^4.0.0-alpha.6",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.3",
+    "express-session": "^1.15.3",
+    "html-loader": "^0.4.5",
+    "markdown": "^0.5.0",
+    "mongoose": "^4.10.4",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.0-rc.2",
+    "webpack": "^2.6.1"
+  },
+  "devDependencies": {
+    "chai": "^4.0.1",
+    "mocha": "^3.4.2",
+    "sinon": "^2.3.2",
+    "angular-mocks": "^1.0.3"
+  }
+}
