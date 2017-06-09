@@ -1,9 +1,16 @@
 # blongo
 MEAN stack blog
 
-#### Requirements
+#### Server Requirements
  * Node 4.x +
  * MongoDB
+
+#### Client Requirements
+Blongo client rquires a **modern** web browser that supports the following features
+ * Fetch API
+ * ES6 Features:
+ 	* Arrow Functions
+ 	* Promises
 
 #### Getting started
  * Make sure mongo is running on localhost
