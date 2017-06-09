@@ -19,7 +19,7 @@ Blongo client rquires a **modern** web browser that supports the following featu
  * Make sure mongo is running on localhost
  * install > `npm install`
  * build > `npm run build`
- * test > `npm run test`
+ * test > `npm run test` (note the lack of tests...)
  * start the server > `npm run start`
  * http://localhost:5000
 
