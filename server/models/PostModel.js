@@ -10,8 +10,10 @@ const postSchema = new Schema({
 	author: { type: Schema.Types.ObjectId, ref: 'User' },
 	upvotes: Number,
 	downvotes: Number,
+	popularity: Number,
 	published: Boolean,
 	publishedOn: Date,
+	voters: Array,
 });
 
 let PostModel;

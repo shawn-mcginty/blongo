@@ -2,14 +2,44 @@
 	<div class="blog-error alert alert-danger" ng-if="home.error !== null">
 		{{ home.error }}
 	</div>
+	<div>
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Sort By...
+			</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				<a class="dropdown-item" href="#" ui-sref="home({page: home.page, sortBy: null, tag: home.tag})">Newest</a>
+				<a class="dropdown-item" href="#" ui-sref="home({page: home.page, sortBy: 'oldest', tag: home.tag})">Oldest</a>
+				<a class="dropdown-item" href="#" ui-sref="home({page: home.page, sortBy: 'coolest', tag: home.tag})">Coolest</a>
+				<a class="dropdown-item" href="#" ui-sref="home({page: home.page, sortBy: 'lamest', tag: home.tag})">Lamest</a>
+			</div>
+		</div>
+	</div>
+	<div class="spacer"><p>&nbsp;</p></div>
 	<div class="blog-post" ng-repeat="post in home.posts">
 		<h3 class="blog-post-title">{{ post.title }}</h2>
 		<p class="blog-post-meta text-muted">{{ post.displayDate }} by <span class="blog-post-author">{{ post.author }}</span></p>
+		<p class="blog-post-tags">
+			<span ng-repeat="tag in post.tags"><span class="badge badge-pill badge-default">{{tag}}</span>&nbsp;</span>
+		</p>
 		<div class="blog-post-body" ng-bind-html="post.body"></div>
-		<div class="blog-post-footer">
-			<p class="blog-post-tags">
-				<span class="badge badge-pill badge-default" ng-repeat="tag in post.tags">{{tag}}</span>
-			</p>
+		<div class="pop-controls">
+			<button class="btn btn-link btn-sm" ng-click="home.upvote(post._id)">
+				<i class="material-icons">thumb_up</i>
+			</button>
+			<button class="btn btn-link btn-sm" ng-click="home.downvote(post._id)">
+				<i class="material-icons">thumb_down</i>
+			</button>
+		</div>
+		<div><p class="text-right"><small>Upvotes: <strong>{{ post.upvotes }}</strong>  Downvotes: <strong>{{ post.downvotes }}</strong></small></p></div>
+		<hr ng-if="$last != true">
+	</div>
+	<div class="row">
+		<div class="col-sm-6">
+			<a href="#" class="btn btn-outline-primary" ng-if="home.prev" ui-sref="home(home.getPrevParams())">&larr; {{ home.prevLabel }}</a>
+		</div>
+		<div class="col-sm-6 text-right">
+			<a href="#" class="btn btn-outline-primary" ng-if="home.next" ui-sref="home(home.getNextParams())">{{ home.nextLabel }} &rarr;</a>
 		</div>
 	</div>
 </div>

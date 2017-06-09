@@ -37,8 +37,24 @@ class DashboardController {
 			})
 			.catch(err => {
 				$timeout(() => $scope.$apply(() => this.error = err.message || err));
-				console.log(this.error);
+				console.error(this.error);
 			});
+	}
+
+	delete(postId) {
+		fetch(`/api/post/${postId}`, {
+			credentials: 'include',
+			method: 'delete',
+		}).then((response) => {
+			if (response.ok) {
+				this._getPostsFromServer();
+			} else {
+				throw new Error('server failed to delete post');
+			}
+		}).catch((err) => {
+			console.error(err);
+			this.$timeout(() => this.$scope.$apply(() => this.error = 'Could not delete your post.'));
+		});
 	}
 }
 

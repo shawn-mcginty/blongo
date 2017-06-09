@@ -1,0 +1,7 @@
+<div>
+	<span ng-repeat="topic in topics.topics">
+		<a href="#" class="btn btn-outline-primary btn-lg" title="{{topic.count}}" style="margin-bottom:5px" ui-sref="home({tag: topic.tag})">{{ topic.tag }}
+		</a>
+		&nbsp;
+	</span> 
+</div>

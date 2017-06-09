@@ -9,10 +9,18 @@ const app = express();
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 
-const port = 3000;
+const port = 5000;
 
 const viewsDir = path.join(__dirname, 'views');
 const mongooseUtils = require('./utils/mongoose');
+
+const isLoggedIn = (req, res, next) => {
+	if (req.user) {
+		next()
+	} else {
+		res.sendStatus(401);
+	}
+};
 
 mongooseUtils.bootstrapDb()
 	.then(() => {
@@ -38,10 +46,19 @@ mongooseUtils.bootstrapDb()
 
 		// setup api endpoints
 		app.get('/api/post', postController.getPosts);
-		app.post('/api/post', postController.createPost);
-		app.get('/api/post/mine', postController.getUserPosts)
+		app.post('/api/post', isLoggedIn, postController.createPost);
+		app.get('/api/post/mine', isLoggedIn, postController.getUserPosts)
+		app.get('/api/post/:postId', postController.getPostById);
+		app.delete('/api/post/:postId', isLoggedIn, postController.deleteUserPost);
+		app.put('/api/post/:postId', isLoggedIn, postController.updateUserPost);
+		app.post('/api/post/:postId/upvote', isLoggedIn, postController.upvotePost);
+		app.post('/api/post/:postId/downvote', isLoggedIn, postController.downvotePost);
+
+		app.get('/api/topics', postController.getTopics);
+
 		app.get('/api/user/count', userController.getUserCount);
-		app.post('/api/markdown', markdownController.mdToHtml);
+
+		app.post('/api/markdown', isLoggedIn, markdownController.mdToHtml);
 
 		// catch all other api endpoints with a 404
 		app.get('/api/*', (req, res) => res.sendStatus(404));

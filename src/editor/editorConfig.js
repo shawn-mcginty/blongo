@@ -5,5 +5,11 @@ module.exports = ['$stateProvider', function($stateProvider) {
 			template: require('./editor-template.html'),
 			controller: 'EditorController',
 			controllerAs: 'editor'
+		})
+		.state('editor.post', {
+			url: '/:postId',
+			template: require('./editor-template.html'),
+			controller: 'EditorController',
+			controllerAs: 'editor'
 		});
 }];

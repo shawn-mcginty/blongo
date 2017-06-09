@@ -3,24 +3,24 @@ html(lang="en")
 	head
 		meta(charset="utf-8")
 		meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
-		script(src="js/lib/jquery.min.js")
-		script(src="js/lib/tether.min.js")
-		script(src="js/lib/bootstrap.min.js")
-		script(src="js/bundle.js")
+		script(src="/js/lib/jquery.min.js")
+		script(src="/js/lib/tether.min.js")
+		script(src="/js/lib/bootstrap.min.js")
+		script(src="/js/bundle.js")
 		link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
-		link(rel="stylesheet", href="stylesheets/lib/bootstrap.min.css")
+		link(rel="stylesheet", href="/stylesheets/lib/bootstrap.min.css")
 		title Blongo | A quick and dirty blogging platform.
 		base(href="/")
 	body(ng-app="app")
 		nav.navbar.navbar-toggleable-md.navbar-inverse.fixed-top.bg-primary
 			button.navbar-toggler.navbar-toggler-right(type="button", data-toggle="collapse", data-target="#navbar", aria-controls="navbar", aria-expanded="false", aria-label="Toggle navigation")
 				span.navbar-toggler-icon
-			a.navbar-brand(href="#", ui-sref="home")
+			a.navbar-brand(href="#", ui-sref="home({page: null, tag: null, sortBy: null})")
 				i.material-icons whatshot
 			#navbar.collapse.navbar-collapse
 				ul.navbar-nav.mr-auto
 					li.nav-item
-						a.nav-link(href="#", ui-sref="home", ui-sref-active="active") Read
+						a.nav-link(href="#", ui-sref="home({page: null, tag: null, sortBy: null})", ui-sref-active="active") Read
 					li.nav-item
 						a.nav-link(href="#", ui-sref="topics", ui-sref-active="active") Topics
 					if (currentUser)
@@ -57,6 +57,6 @@ html(lang="en")
 							h6.card-subtitle.mb-2.text-muted This is the stuff on the side, info that probably nobody ever reads.  This guy should drop to the footer if the screen size is too small.
 							p.card-text This blog was created using Bootstrap 4 alpha, so please excuse minor bugs if you find any.  Thanks 👍
 							a(href="https://v4-alpha.getbootstrap.com", class="card-link") Check out Bootstrap 4
-		//- footer
-		//- 	.container
-		//- 		span.text-muted Created for fun, using Angular 1.x and Node 4.x.
+			.row
+				//- just a little buffer at the bot of the screen, no real footer
+				| &nbsp;

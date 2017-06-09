@@ -1,14 +1,20 @@
 class EditorController {
-	constructor($scope, $timeout) {
+	constructor($scope, $timeout, $stateParams) {
 		this.title;
 		this.tags;
 		this.body;
 		this.preview;
 		this.errorMessage = null;
+		this.id;
 
 		// special angular functions
 		this.$scope = $scope;
 		this.$timeout = $timeout;
+
+		if ($stateParams && $stateParams.postId) {
+			this.id = $stateParams.postId;
+			this._getPost(this.id);
+		}
 	}
 
 	showPreview() {
@@ -46,9 +52,15 @@ class EditorController {
 		} else if (!this.title) {
 			this.errorMessage = 'Every post needs a catchy title, don\'t you think?';
 		} else {
+			let url = '/api/post';
+			let method = 'post';
+			if (this.id) {
+				url = `${url}/${this.id}`;
+				method = 'put';
+			}
 			const tags = this.tags || '';
-			fetch('/api/post', {
-				method: 'post',
+			fetch(url, {
+				method,
 				credentials: 'include',
 				body: JSON.stringify({
 					title: this.title,
@@ -60,7 +72,7 @@ class EditorController {
 				headers: { 'Content-type': 'application/json' }
 			}).then((response) => {
 				if (response.ok) {
-					// success! go to dashboard
+					window.location.href = '/dashboard';
 				} else {
 					this.$timeout(() => this.$scope.$apply(() => {
 						this.errorMessage = 'For some reson your article can\'t be saved.  ' +
@@ -73,6 +85,35 @@ class EditorController {
 
 	clearErrorMessage() {
 		this.errorMessage = null;
+	}
+
+	_getPost(id) {
+		fetch(`/api/post/${id}`, {
+			credentials: 'include',
+		}).then((response) => {
+			if (response.ok) {
+				return response.json();
+			}
+
+			return null;
+		}).then((post) => {
+			this.$timeout(() => this.$scope.$apply(() => {
+				if (post) {
+					this.title = post.title;
+					this.body = post.body;
+					this.tags = post.tags.join(',');
+					this.showPreview();
+				} else {
+					this.errorMessage = 'Could not load your post.. oh well.';
+				}
+			}));
+		}).catch((err) => {
+			this.$timeout(() => this.$scope.$apply(() => {
+				this.errorMessage = 'Could not load your post.. oh well.';
+			}));
+
+			console.error(err);
+		})
 	}
 }
 

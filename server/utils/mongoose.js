@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 const DB_HOST = 'localhost';
-const DB_NAME = 'blongo-dev';
+const DB_NAME = 'blongo-test';
 
 // config mongoose to use native Promise API
 mongoose.Promise = Promise;

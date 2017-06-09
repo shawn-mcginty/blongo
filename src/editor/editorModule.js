@@ -7,5 +7,5 @@ const EditorController = require('./editorController');
 
 module.exports = angular.module('app.editor', ['ui.router', 'ngSanitize'])
 	.config(config)
-	.controller('EditorController', ['$scope', '$timeout', EditorController])
+	.controller('EditorController', ['$scope', '$timeout', '$stateParams', EditorController])
 	.name;
