@@ -11,6 +11,9 @@ Blongo client rquires a **modern** web browser that supports the following featu
  * ES6 Features:
  	* Arrow Functions
  	* Promises
+ 	* Template literals
+ 	* Classes
+ 	* `const` and `let`
 
 #### Getting started
  * Make sure mongo is running on localhost
